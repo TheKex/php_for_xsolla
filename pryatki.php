@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json");
-function GetVodu($children, $count){
+function GetVodu(array $children, int $count): srting {
     for($i = $count - 1, $j = 0; count($children) > 1; $i--, $j++){
         if($j == count($children))
             $j = 0;
