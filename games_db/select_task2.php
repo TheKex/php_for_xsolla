@@ -30,6 +30,7 @@ class DB_operations
             return $res;
     }
 
+    //Задача 4
     public static function getCountGamesInSeriesByPublisher($connection, $publisher): array
     {
             $select = "SELECT game_series.NAME AS \"SERIES\", COUNT(game.NAME) AS \"GAMES_COUNT\"
@@ -59,26 +60,27 @@ if($connection == false){
 }
 
 
-echo "Игры в которые еще не играл <br>";
+echo "Игры в которые еще не играл: <br>";
 $actualGames = DB_operations::getActualGames($connection);
 foreach ($actualGames as $key => $value) {
-    print_r($value);
-    echo "<hr>";
+    echo ($value['NAME'].' - '.$value['YEAR'].'<br>');
 }
+echo "<hr>";
+
 
 echo "<br> Топ 3 Экшена <br>";
 $top3Action = DB_operations::getTop3GameByGenre($connection, 'Action');
 foreach ($top3Action as $key => $value) {
-    print_r($value);
-    echo "<hr>";
+    echo($value['NAME'].'<br>');
 }
+echo "<hr>";
 
 echo "<br> Количество игр в сериях от издателя Ubisoft: <br>";
 $gameSeries = DB_operations::getCountGamesInSeriesByPublisher($connection, 'Ubisoft');
 foreach ($gameSeries as $key => $value) {
-    print_r($value);
-    echo "<hr>";
+    print_r($value['SERIES'].' : '.$value['GAMES_COUNT'].'<br>');
 }
+echo "<hr>";
 
 mysqli_close($connection);
 ?>
